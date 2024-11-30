@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import './App.css';
 
+// Define your projects with a link to the GitHub repo
 const projects = [
   {
-    title: 'Project 1',
-    description: 'Description of Project 1.',
-    link: 'https://example.com/project1',
+    title: 'Race Simulator',
+    description: 'A racing game simulator built with JavaScript.',
+    link: 'https://elowe15.github.io/RaceSimulator/',
+    githubLink: 'https://github.com/ELowe15/RaceSimulator', // Add GitHub link
     video: 'https://via.placeholder.com/300', // Example video/image URL
   },
   {
     title: 'Project 2',
-    description: 'Description of Project 2.',
+    description: 'A description of Project 2.',
     link: 'https://example.com/project2',
+    githubLink: 'https://github.com/ELowe15/Project2', // Add GitHub link
     video: 'https://via.placeholder.com/300',
   },
-  // Add more projects here
+  // Add more projects here as needed
 ];
 
 function App() {
@@ -51,6 +54,17 @@ function App() {
               >
                 View Project
               </a>
+              <div className="mt-4">
+                {/* GitHub Repo Link */}
+                <a
+                  href={project.githubLink}
+                  className="text-gray-600 dark:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-github text-xl"></i> GitHub Repo
+                </a>
+              </div>
             </div>
           ))}
         </div>
@@ -59,21 +73,22 @@ function App() {
       <section className="my-10 px-6">
         <h2 className="text-3xl font-semibold text-center">Connect With Me</h2>
         <div className="flex justify-center mt-4">
+          {/* GitHub and LinkedIn Icons */}
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/ELowe15"
             target="_blank"
             rel="noopener noreferrer"
             className="mx-4 text-3xl text-gray-600 dark:text-white"
           >
-            <i className="fab fa-github"></i> GitHub
+            <i className="fab fa-github"></i>
           </a>
           <a
-            href="https://www.linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/evan-lowe-53a7112aa/"
             target="_blank"
             rel="noopener noreferrer"
             className="mx-4 text-3xl text-gray-600 dark:text-white"
           >
-            <i className="fab fa-linkedin"></i> LinkedIn
+            <i className="fab fa-linkedin"></i>
           </a>
         </div>
       </section>
