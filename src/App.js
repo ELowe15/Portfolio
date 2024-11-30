@@ -25,18 +25,19 @@ function App() {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <header className="bg-blue-600 text-white p-6 text-center">
+      {/* Ensure the dark mode is applied globally by using dark classes for all sections */}
+      <header className="bg-blue-600 text-white p-6 text-center dark:bg-gray-800 dark:text-white">
         <h1 className="text-4xl font-bold">Evan's Portfolio</h1>
         <p className="mt-2">Welcome to my portfolio website!</p>
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="mt-4 px-4 py-2 bg-gray-800 text-white rounded"
+          className="mt-4 px-4 py-2 bg-gray-800 text-white rounded dark:bg-gray-700"
         >
           Toggle Dark Mode
         </button>
       </header>
 
-      <section className="my-10 px-6">
+      <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
         <h2 className="text-3xl font-semibold text-center">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {projects.map((project, index) => (
@@ -48,7 +49,7 @@ function App() {
               <p className="text-gray-600 mt-2">{project.description}</p>
               <a
                 href={project.link}
-                className="text-blue-600 mt-4 inline-block"
+                className="text-blue-600 mt-4 inline-block dark:text-blue-400"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -70,7 +71,7 @@ function App() {
         </div>
       </section>
 
-      <section className="my-10 px-6">
+      <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
         <h2 className="text-3xl font-semibold text-center">Connect With Me</h2>
         <div className="flex justify-center mt-4">
           {/* GitHub and LinkedIn Icons */}
@@ -93,7 +94,7 @@ function App() {
         </div>
       </section>
 
-      <footer className="bg-gray-800 text-white p-6 text-center">
+      <footer className="bg-gray-800 text-white p-6 text-center dark:bg-gray-900">
         <p>&copy; 2024 Evan's Portfolio</p>
       </footer>
     </div>
