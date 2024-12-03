@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
+import emailjs from 'emailjs-com';
 
 const imageRoot = '/Portfolio/images/';
 
@@ -39,16 +40,57 @@ const projects = [
 ];
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true); // Set darkMode to true by default
+  const [darkMode, setDarkMode] = useState(true);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [statusMessage, setStatusMessage] = useState('');
 
   useEffect(() => {
-    const htmlElement = document.documentElement; // Select the <html> element
+    const htmlElement = document.documentElement;
     if (darkMode) {
       htmlElement.classList.add('dark');
     } else {
       htmlElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  // Handle form data change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Send email using EmailJS
+  const sendEmail = (e) => {
+    e.preventDefault();
+    const { name, email, message } = formData;
+
+    if (!name || !email || !message) {
+      setStatusMessage('Please fill in all fields.');
+      setTimeout(() => setStatusMessage(''), 3000); // Clear message after 3 seconds
+      return;
+    }
+
+    emailjs
+      .sendForm('service_ls4awwg', 'template_6phj3ib', e.target, 'jBRS5-M513Scz5SCC')
+      .then(
+        (result) => {
+          console.log(result.text);
+          setStatusMessage('Message sent successfully!');
+          setFormData({ name: '', email: '', phone: '', message: '' });
+          setTimeout(() => setStatusMessage(''), 3000); // Clear message after 3 seconds
+        },
+        (error) => {
+          console.log(error.text);
+          setStatusMessage('Error sending message. Please try again.');
+          setTimeout(() => setStatusMessage(''), 3000); // Clear message after 3 seconds
+        }
+      );
+  };
 
   return (
     <div className={`App ${darkMode ? 'dark' : ''}`}>
@@ -60,7 +102,7 @@ function App() {
         {darkMode ? '☀' : '🌙'}
       </button>
 
-      <header className="bg-purple-600 text-white p-6 text-center dark:bg-gray-800 dark:text-white">
+      <header className="bg-gray-600 text-white p-6 text-center dark:bg-gray-800 dark:text-white">
         <h1 className="text-4xl font-bold">Evan's Portfolio</h1>
         <p className="mt-2">Welcome to my portfolio website! A work in progress.</p>
       </header>
@@ -79,7 +121,7 @@ function App() {
               {project.link && (
                 <a
                   href={project.link}
-                  className="text-purple-600 mt-4 inline-block dark:text-blue-400"
+                  className="text-gray-600 mt-4 inline-block dark:text-blue-400"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -121,17 +163,88 @@ function App() {
             <i className="fab fa-linkedin"></i>
           </a>
         </div>
-      </section>
 
-      <footer className="p-6 bg-purple-600 text-white text-center dark:bg-gray-800 dark:text-white">
+        <div className="mt-10 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+          <h3 className="text-2xl font-semibold text-center">Send Me a Message</h3>
+          <form onSubmit={sendEmail} className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="mb-4">
+                <label htmlFor="name" className="block text-gray-700 dark:text-gray-300">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-gray-700 dark:text-gray-300">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="phone" className="block text-gray-700 dark:text-gray-300">
+                  Phone
+                </label>
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Optional"
+                  className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                />
+              </div>
+            </div>
+            <div className="mb-4">
+              <label htmlFor="message" className="block text-gray-700 dark:text-gray-300">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows="4"
+                className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+            >
+              Send Message
+            </button>
+          </form>
+          {statusMessage && (
+            <div className="mt-4 text-center text-lg text-red-500">{statusMessage}</div>
+          )}
+        </div>
+      </section>
+      <footer className="p-6 bg-gray-600 text-white text-center dark:bg-gray-900 dark:text-white">
         <p>&copy; 2024 Evan's Portfolio</p>
       </footer>
     </div>
   );
 }
 
-// Carousel Component for Media
-function MediaCarousel({ media }) {
+const MediaCarousel = ({ media }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(false); // Full-screen state
   const mediaContainerRef = useRef(null);
@@ -194,7 +307,7 @@ function MediaCarousel({ media }) {
               className="w-full h-full object-contain rounded-lg"
             />
             <button
-              className="absolute bottom-4 right-4 bg-transparent text-white p-2"
+              className="absolute bottom-0 right-0.5 bg-transparent text-white p-2"
               onClick={toggleFullScreen}
             >
               <i
@@ -208,6 +321,6 @@ function MediaCarousel({ media }) {
       </div>
     </div>
   );
-}
+};
 
 export default App;
