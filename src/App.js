@@ -97,14 +97,39 @@ function App() {
       {/* Dark Mode Toggle */}
       <button
         onClick={() => setDarkMode(!darkMode)}
-        className="fixed top-4 right-4 px-2 py-1 rounded-full text-sm font-bold text-white bg-black hover:bg-gray-700 transition dark:bg-gray-400 dark:hover:bg-gray-600"
+        className="fixed top-4 right-4 px-2 py-1 rounded-full text-sm font-bold text-yellow-400 bg-black hover:bg-gray-700 transition dark:bg-gray-500 dark:hover:bg-gray-600 z-10"
       >
         {darkMode ? '☀' : '🌙'}
       </button>
 
-      <header className="bg-gray-600 text-white p-6 text-center dark:bg-gray-800 dark:text-white">
-        <h1 className="text-4xl font-bold">Evan's Portfolio</h1>
-        <p className="mt-2">Welcome to my portfolio website! A work in progress.</p>
+      <header className="bg-gray-300 text-black p-6 dark:bg-gray-800 dark:text-white relative">
+        <div className="flex justify-between items-center">
+          {/* Contact Section (Far Left) */}
+          <div className="flex flex-col items-start">
+            <a
+              href="https://github.com/ELowe15"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-4 text-gray-600 dark:text-white text-xl flex items-center"
+            >
+              <i className="fab fa-github"></i> <span className="ml-2">GitHub</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/evan-lowe-53a7112aa/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-4 text-gray-600 dark:text-white text-xl flex items-center"
+            >
+              <i className="fab fa-linkedin"></i> <span className="ml-2">LinkedIn</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Portfolio Title Section (Centered using absolute positioning) */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <h1 className="text-4xl font-bold">Evan Lowe's Portfolio</h1>
+          <p className="mt-2">Welcome to my portfolio website! A work in progress.</p>
+        </div>
       </header>
 
       <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
@@ -113,7 +138,7 @@ function App() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white"
+              className="bg-gray-300 p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white"
             >
               <MediaCarousel media={project.media} />
               <h3 className="text-2xl font-semibold mt-4">{project.title}</h3>
@@ -144,28 +169,8 @@ function App() {
       </section>
 
       <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
-        <h2 className="text-3xl font-semibold text-center">Connect With Me</h2>
-        <div className="flex justify-center mt-4">
-          <a
-            href="https://github.com/ELowe15"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-4 text-3xl text-gray-600 dark:text-white"
-          >
-            <i className="fab fa-github"></i>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/evan-lowe-53a7112aa/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-4 text-3xl text-gray-600 dark:text-white"
-          >
-            <i className="fab fa-linkedin"></i>
-          </a>
-        </div>
-
-        <div className="mt-10 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-          <h3 className="text-2xl font-semibold text-center">Send Me a Message</h3>
+        <div className="mt-10 bg-gray-300 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+          <h3 className="text-2xl font-semibold text-center">Contact Me</h3>
           <form onSubmit={sendEmail} className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="mb-4">
@@ -206,7 +211,7 @@ function App() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="Optional"
+                  placeholder="(Optional)"
                   className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                 />
               </div>
@@ -237,7 +242,7 @@ function App() {
           )}
         </div>
       </section>
-      <footer className="p-6 bg-gray-600 text-white text-center dark:bg-gray-900 dark:text-white">
+      <footer className="p-6 bg-gray-300 text-center dark:bg-gray-900 dark:text-white">
         <p>&copy; 2024 Evan's Portfolio</p>
       </footer>
     </div>
@@ -306,14 +311,13 @@ const MediaCarousel = ({ media }) => {
               alt={`Media ${currentIndex + 1}`}
               className="w-full h-full object-contain rounded-lg"
             />
+            {/* Fullscreen button, visible on screens larger than 'sm' */}
             <button
-              className="absolute bottom-0 right-0.5 bg-transparent text-white p-2"
+              className="absolute bottom-0 right-0.5 bg-transparent text-white p-2 hidden sm:block"
               onClick={toggleFullScreen}
             >
               <i
-                className={`fas ${
-                  isFullScreen ? 'fa-compress' : 'fa-expand'
-                } text-lg`}
+                className={`fas ${isFullScreen ? 'fa-compress' : 'fa-expand'} text-lg`}
               ></i>
             </button>
           </div>
