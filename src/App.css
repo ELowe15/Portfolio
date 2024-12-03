@@ -47,8 +47,7 @@
 }
 
 /* Set a consistent background color */
-html,
-body {
+html {
   height: 100%;
   background-color: #ffffff; /* Light mode background */
   font-family: 'Arial', sans-serif;
@@ -56,12 +55,8 @@ body {
 
 /* Dark mode styles */
 html.dark {
-  background-color: #121212; /* Dark mode background */
-}
-
-/* Optional: Apply dark mode background color for entire body */
-body.dark {
-  background-color: #121212; /* Dark mode body background */
+  background-color: #111827; /* Dark mode background */
+  /*background-color: #1F2937; /* Dark mode background */
 }
 
 /* Ensure the app fills the height of the viewport */
@@ -79,4 +74,34 @@ button {
   transition: background-color 0.3s ease;
 }
 
+/* Add in App.css */
 
+.media-container {
+  width: 100%;
+  transition: all 0.3s ease; /* Smooth transition when toggling */
+}
+
+.media-container.normal {
+  height: 350px; /* Normal height for the media */
+}
+
+.media-container.fullscreen {
+  height: 100vh; /* Full screen height */
+}
+
+button.fullscreen-toggle {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+button.fullscreen-toggle:hover {
+  background-color: #0056b3;
+}
