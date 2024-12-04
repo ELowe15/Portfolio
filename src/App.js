@@ -110,7 +110,7 @@ function App() {
               href="https://github.com/ELowe15"
               target="_blank"
               rel="noopener noreferrer"
-              className="mb-4 text-gray-600 dark:text-white text-xl flex items-center"
+              className="mb-4 text-gray-600 dark:text-white text-sm md:text-xl flex items-center"
             >
               <i className="fab fa-github"></i> <span className="ml-2">GitHub</span>
             </a>
@@ -118,7 +118,7 @@ function App() {
               href="https://www.linkedin.com/in/evan-lowe-53a7112aa/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mb-4 text-gray-600 dark:text-white text-xl flex items-center"
+              className="mb-4 text-gray-600 dark:text-white text-sm md:text-xl flex items-center"
             >
               <i className="fab fa-linkedin"></i> <span className="ml-2">LinkedIn</span>
             </a>
@@ -128,9 +128,17 @@ function App() {
         {/* Portfolio Title Section (Centered using absolute positioning) */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
           <h1 className="text-4xl font-bold">Evan Lowe's Portfolio</h1>
-          <p className="mt-2">Welcome to my portfolio website! A work in progress.</p>
         </div>
       </header>
+
+      {/* Summary Section */}
+      <section className="bg-gray-400 text-black p-6 dark:bg-gray-700 dark:text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-base md:text-lg">
+            Welcome to my portfolio! This site showcases my projects, skills, and experience. Feel free to explore and connect with me through GitHub or LinkedIn!
+          </p>
+        </div>
+      </section>
 
       <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
         <h2 className="text-3xl font-semibold text-center">Projects</h2>
