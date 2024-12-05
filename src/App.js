@@ -4,14 +4,14 @@ import emailjs from 'emailjs-com';
 
 const imageRoot = '/Portfolio/images/';
 
-// Define your projects with media (images/videos) and optional link
 const projects = [
   {
     title: 'Race Simulator',
-    description: 'A racing game simulator built with JavaScript.',
+    description: 'A fun, interactive Fantasy Sports Race application where users can simulate races with customizable players across different sports. The races are intended to determine fantasy draft orders randomly.',
     link: 'https://elowe15.github.io/RaceSimulator/',
     githubLink: 'https://github.com/ELowe15/RaceSimulator',
-    media: [imageRoot + 'RaceSimDemo.mp4', imageRoot + 'bballRace.png'],
+    media: [imageRoot + 'bballRace.png', imageRoot + 'fballRace.png', imageRoot + 'hockeyRace.png', imageRoot + 'baseballRace.png',imageRoot + 'RaceSimDemo.mp4',],
+    tools: ['JavaScript', 'JSON', 'HTML', 'CSS'],
   },
   {
     title: 'XM-23 Emulator',
@@ -19,15 +19,25 @@ const projects = [
       'The XM-23 Emulator emulates the hardware behavior of the 16-bit von Neumann XM-23 machine, providing an environment to debug, analyze, and execute programs in a virtual environment.',
     link: '',
     githubLink: 'https://github.com/ELowe15/XM-23-Emulator',
-    media: [imageRoot + 'xm23.png'],
+    media: [imageRoot + 'xm23.png', imageRoot + 'EmulatorArray.mp4'],
+    tools: ['C', 'Assembly', 'Debugger Development', 'Cache', 'Hardware Emulation', 'Interupt Handling'],
+  },
+  {
+    title: 'Brain Computer Interface',
+    description: 'A multithreaded game played solely with the user’s mind. This was accomplished by inhibiting certain brain signals in the user and then reading them in real time with an EEG headset.',
+    link: '',
+    githubLink: '',
+    media: [imageRoot + 'Gambit.webp'],
+    tools: ['Python', 'Multithreading', 'Real Time Data Processing', 'EEG', 'Sensors', 'Game Design', 'Bluetooth', 'UDP'],
   },
   {
     title: 'Oil Sensing Robot Simulation',
     description:
-      'This project is designed to control and manage data from multiple sensors used in a sensor platform, including SBL (Short Baseline Location), Depth, and Oil sensors. It processes sensor data, calculates location coordinates based on sensor inputs, and sends data to a host PC for further use.',
+      'This project simulates control and communication from multiple sensors used in a sensor platform, including SBL (Short Baseline Location), Depth, and Oil sensors. It processes sensor data, calculates location coordinates based on sensor inputs, and sends data to a host PC for further use.',
     link: '',
     githubLink: 'https://github.com/ELowe15/Oil_Sensing_Robot',
     media: [imageRoot + 'oil.png', imageRoot + 'oilTerm1.png', imageRoot + 'oilTerm2.png'],
+    tools: ['C', 'Multithreading', 'USART', 'Microcontroller', 'Real Time Communcation', 'Embedded Device'],
   },
   {
     title: 'Craps Dice Game',
@@ -36,6 +46,7 @@ const projects = [
     link: '',
     githubLink: 'https://github.com/ELowe15/Craps',
     media: [imageRoot + 'craps.png'],
+    tools: ['Verilog', 'Digital Design', 'FPGA'],
   },
 ];
 
@@ -104,7 +115,7 @@ function App() {
 
       <header className="bg-gray-300 text-black p-6 dark:bg-gray-800 dark:text-white relative">
         <div className="flex justify-between items-center">
-          {/* Contact Section (Far Left) */}
+          {/* Contact Section */}
           <div className="flex flex-col items-start">
             <a
               href="https://github.com/ELowe15"
@@ -125,9 +136,11 @@ function App() {
           </div>
         </div>
 
-        {/* Portfolio Title Section (Centered using absolute positioning) */}
+        {/* Portfolio Title Section*/}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="text-4xl font-bold">Evan Lowe's Portfolio</h1>
+          <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+          Evan Lowe's Portfolio
+          </h1>
         </div>
       </header>
 
@@ -135,7 +148,7 @@ function App() {
       <section className="bg-gray-400 text-black p-6 dark:bg-gray-700 dark:text-white">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-base md:text-lg">
-            Welcome to my portfolio! This site showcases my projects, skills, and experience. Feel free to explore and connect with me through GitHub or LinkedIn!
+            Welcome to my portfolio built woth Javascript, HTML, React and TailwindCSS! This site showcases my projects, skills, and experience. Feel free to explore and connect with me through GitHub, LinkedIn, or by sending a direct message in the contact section below!
           </p>
         </div>
       </section>
@@ -151,6 +164,21 @@ function App() {
               <MediaCarousel media={project.media} />
               <h3 className="text-2xl font-semibold mt-4">{project.title}</h3>
               <p className="text-gray-600 dark:text-gray-400 mt-2">{project.description}</p>
+
+              {/* Tools Section */}
+              {project.tools && (
+                <div className="mt-2 flex flex-wrap justify-center gap-2">
+                  {project.tools.map((tool, index) => (
+                    <span
+                      key={index}
+                      className="inline-block bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 px-2 py-1 text-sm rounded-full"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               {project.link && (
                 <a
                   href={project.link}
@@ -161,16 +189,18 @@ function App() {
                   View Project
                 </a>
               )}
-              <div className="mt-4">
-                <a
-                  href={project.githubLink}
-                  className="text-gray-600 dark:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fab fa-github text-xl"></i> GitHub Repo
-                </a>
-              </div>
+              {project.githubLink && (
+                <div className="mt-4">
+                  <a
+                    href={project.githubLink}
+                    className="text-gray-600 dark:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-github text-xl"></i> GitHub Repo
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>
