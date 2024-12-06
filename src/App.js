@@ -297,8 +297,22 @@ function App() {
 
 const MediaCarousel = ({ media }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFullScreen, setIsFullScreen] = useState(false); // Full-screen state
+  const [isFullScreen, setIsFullScreen] = useState(false); // Custom full-screen state
   const mediaContainerRef = useRef(null);
+  const videoRef = useRef(null); // Reference to the video element
+
+  useEffect(() => {
+    const handleFullScreenChange = () => {
+      const isNowFullScreen = !!document.fullscreenElement;
+      setIsFullScreen(isNowFullScreen);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullScreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullScreenChange);
+    };
+  }, []);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % media.length);
@@ -316,8 +330,23 @@ const MediaCarousel = ({ media }) => {
     } else if (mediaContainerRef.current.requestFullscreen) {
       mediaContainerRef.current.requestFullscreen();
     }
-    setIsFullScreen(!isFullScreen); // Update state
+    setIsFullScreen(!isFullScreen);
   };
+
+  const handleMediaChange = () => {
+    const currentMedia = media[currentIndex];
+    if (isFullScreen && currentMedia.endsWith('.mp4') && videoRef.current) {
+      // Exit custom full-screen
+      document.exitFullscreen().then(() => {
+        // Enter native full-screen for video
+        videoRef.current.requestFullscreen();
+      });
+    }
+  };
+
+  useEffect(() => {
+    handleMediaChange();
+  }, [currentIndex]);
 
   const currentMedia = media[currentIndex];
 
@@ -350,7 +379,6 @@ const MediaCarousel = ({ media }) => {
       )}
       <div className="w-full h-full flex justify-center items-center">
         {currentMedia.includes('youtube.com/embed') ? (
-          // Render YouTube iframe
           <iframe
             src={currentMedia}
             className="w-full h-full rounded-lg"
@@ -360,14 +388,13 @@ const MediaCarousel = ({ media }) => {
             title="YouTube Video"
           ></iframe>
         ) : currentMedia.endsWith('.mp4') ? (
-          // Render video
           <video
+            ref={videoRef}
             src={currentMedia}
             className="w-full h-full object-contain rounded-lg"
             controls
           />
         ) : (
-          // Render image with full-screen button
           <div className="relative w-full h-full">
             <img
               src={currentMedia}
