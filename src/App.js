@@ -40,6 +40,14 @@ const projects = [
     tools: ['C', 'Multithreading', 'USART', 'Microcontroller', 'Real Time Communcation', 'Embedded Device'],
   },
   {
+    title: 'Robot Navigation',
+    description: 'Developed navigation software and implemented on a Raspberry Pi which connected to a robot and its sensors. The navigation algorithm utilized sensor information to map an environment allowing the robot to safely move without collisions',
+    link: '',
+    githubLink: '',
+    media: ['https://www.youtube.com/embed/LiJEoqCagCQ?start=48'], // Embedded YouTube link
+    tools: ['Python', 'C++', 'Raspberry Pi', 'Linux', 'Lidar'],
+  },
+  {
     title: 'Craps Dice Game',
     description:
       'This Verilog-based dice game simulates a simple craps game. It rolls two dice, checks if the player wins, loses, or continues to roll, and displays the results. The game uses a state machine to manage different phases like "natural," "craps," or "point" rolls.',
@@ -116,7 +124,7 @@ function App() {
       <header className="bg-gray-300 text-black p-6 dark:bg-gray-800 dark:text-white relative">
         <div className="flex justify-between items-center">
           {/* Contact Section */}
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start justify-center h-full">
             <a
               href="https://github.com/ELowe15"
               target="_blank"
@@ -129,7 +137,7 @@ function App() {
               href="https://www.linkedin.com/in/evan-lowe-53a7112aa/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mb-4 text-gray-600 dark:text-white text-sm md:text-xl flex items-center"
+              className="text-gray-600 dark:text-white text-sm md:text-xl flex items-center"
             >
               <i className="fab fa-linkedin"></i> <span className="ml-2">LinkedIn</span>
             </a>
@@ -148,7 +156,7 @@ function App() {
       <section className="bg-gray-400 text-black p-6 dark:bg-gray-700 dark:text-white">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-base md:text-lg">
-            Welcome to my portfolio built woth Javascript, HTML, React and TailwindCSS! This site showcases my projects, skills, and experience. Feel free to explore and connect with me through GitHub, LinkedIn, or by sending a direct message in the contact section below!
+            Welcome to my portfolio built with Javascript, React, HTML and Tailwind CSS! This site showcases my projects, skills, and experience. Feel free to explore and connect with me through GitHub, LinkedIn, or by sending a direct message in the contact section below!
           </p>
         </div>
       </section>
@@ -316,42 +324,58 @@ const MediaCarousel = ({ media }) => {
   return (
     <div
       ref={mediaContainerRef}
-      className="relative h-80 transition-all ease-in-out"
+      className={`relative h-80 transition-all ease-in-out ${isFullScreen ? 'fullscreen-active' : ''}`}
       style={{ backgroundColor: 'black' }}
     >
+      {/* Navigation Arrows */}
       {media.length > 1 && (
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-[-1.6rem] top-1/2 transform -translate-y-1/2 bg-gray-200 text-black p-2 rounded-full dark:bg-gray-700 dark:text-white"
+            className={`absolute ${
+              isFullScreen ? 'left-2' : 'left-[-1.6rem]'
+            } top-1/2 transform -translate-y-1/2 bg-gray-200 text-black p-2 rounded-full dark:bg-gray-700 dark:text-white z-50`}
           >
             &lt;
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-[-1.6rem] top-1/2 transform -translate-y-1/2 bg-gray-200 text-black p-2 rounded-full dark:bg-gray-700 dark:text-white"
+            className={`absolute ${
+              isFullScreen ? 'right-2' : 'right-[-1.6rem]'
+            } top-1/2 transform -translate-y-1/2 bg-gray-200 text-black p-2 rounded-full dark:bg-gray-700 dark:text-white z-50`}
           >
             &gt;
           </button>
         </>
       )}
       <div className="w-full h-full flex justify-center items-center">
-        {currentMedia.endsWith('.mp4') ? (
+        {currentMedia.includes('youtube.com/embed') ? (
+          // Render YouTube iframe
+          <iframe
+            src={currentMedia}
+            className="w-full h-full rounded-lg"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="YouTube Video"
+          ></iframe>
+        ) : currentMedia.endsWith('.mp4') ? (
+          // Render video
           <video
             src={currentMedia}
             className="w-full h-full object-contain rounded-lg"
             controls
           />
         ) : (
+          // Render image with full-screen button
           <div className="relative w-full h-full">
             <img
               src={currentMedia}
               alt={`Media ${currentIndex + 1}`}
               className="w-full h-full object-contain rounded-lg"
             />
-            {/* Fullscreen button, visible on screens larger than 'sm' */}
             <button
-              className="absolute bottom-0 right-0.5 bg-transparent text-white p-2 hidden sm:block"
+              className="absolute bottom-2 right-2 bg-transparent text-white p-2 hidden sm:block"
               onClick={toggleFullScreen}
             >
               <i
