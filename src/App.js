@@ -1,62 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
+import { projects, jobs, imageRoot } from './Work.js';
+import { MediaCarousel } from './Carousel.js';
 import emailjs from 'emailjs-com';
-
-const imageRoot = '/Portfolio/images/';
-
-const projects = [
-  {
-    title: 'Race Simulator',
-    description: 'A fun, interactive Fantasy Sports Race application where users can simulate races with customizable players across different sports. The races are intended to determine fantasy draft orders randomly.',
-    link: 'https://elowe15.github.io/RaceSimulator/',
-    githubLink: 'https://github.com/ELowe15/RaceSimulator',
-    media: [imageRoot + 'bballRace.png', imageRoot + 'fballRace.png', imageRoot + 'hockeyRace.png', imageRoot + 'baseballRace.png',imageRoot + 'RaceSimDemo.mp4',],
-    tools: ['JavaScript', 'JSON', 'HTML', 'CSS'],
-  },
-  {
-    title: 'XM-23 Emulator',
-    description:
-      'The XM-23 Emulator emulates the hardware behavior of the 16-bit von Neumann XM-23 machine, providing an environment to debug, analyze, and execute programs in a virtual environment.',
-    link: '',
-    githubLink: 'https://github.com/ELowe15/XM-23-Emulator',
-    media: [imageRoot + 'xm23.png', imageRoot + 'EmulatorArray.mp4'],
-    tools: ['C', 'Assembly', 'Debugger Development', 'Cache', 'Hardware Emulation', 'Interupt Handling'],
-  },
-  {
-    title: 'Brain Computer Interface',
-    description: 'A multithreaded game played solely with the user’s mind. This was accomplished by inhibiting certain brain signals in the user and then reading them in real time with an EEG headset.',
-    link: '',
-    githubLink: '',
-    media: [imageRoot + 'Gambit.webp'],
-    tools: ['Python', 'Multithreading', 'Real Time Data Processing', 'EEG', 'Sensors', 'Game Design', 'Bluetooth', 'UDP'],
-  },
-  {
-    title: 'Oil Sensing Robot Simulation',
-    description:
-      'This project simulates control and communication from multiple sensors used in a sensor platform, including SBL (Short Baseline Location), Depth, and Oil sensors. It processes sensor data, calculates location coordinates based on sensor inputs, and sends data to a host PC for further use.',
-    link: '',
-    githubLink: 'https://github.com/ELowe15/Oil_Sensing_Robot',
-    media: [imageRoot + 'oil.png', imageRoot + 'oilTerm1.png', imageRoot + 'oilTerm2.png'],
-    tools: ['C', 'Multithreading', 'USART', 'Microcontroller', 'Real Time Communcation', 'Embedded Device'],
-  },
-  {
-    title: 'Robot Navigation',
-    description: 'Developed navigation software and implemented on a Raspberry Pi which connected to a robot and its sensors. The navigation algorithm utilized sensor information to map an environment allowing the robot to safely move without collisions',
-    link: '',
-    githubLink: '',
-    media: ['https://www.youtube.com/embed/LiJEoqCagCQ?start=48'], // Embedded YouTube link
-    tools: ['Python', 'C++', 'Raspberry Pi', 'Linux', 'Lidar'],
-  },
-  {
-    title: 'Craps Dice Game',
-    description:
-      'This Verilog-based dice game simulates a simple craps game. It rolls two dice, checks if the player wins, loses, or continues to roll, and displays the results. The game uses a state machine to manage different phases like "natural," "craps," or "point" rolls.',
-    link: '',
-    githubLink: 'https://github.com/ELowe15/Craps',
-    media: [imageRoot + 'craps.png'],
-    tools: ['Verilog', 'Digital Design', 'FPGA'],
-  },
-];
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -142,25 +88,38 @@ function App() {
               <i className="fab fa-linkedin"></i> <span className="ml-2">LinkedIn</span>
             </a>
           </div>
-        </div>
 
-        {/* Portfolio Title Section*/}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
-          Evan Lowe's Portfolio
-          </h1>
+          {/* Portfolio Title Section*/}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+              Evan Lowe's Portfolio
+            </h1>
+          </div>
         </div>
       </header>
 
       {/* Summary Section */}
-      <section className="bg-gray-400 text-black p-6 dark:bg-gray-700 dark:text-white">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="flex flex-col lg:flex-row items-center justify-center bg-gray-400 text-black p-6 dark:bg-gray-700 dark:text-white">
+        {/* Picture Section */}
+        <div className="w-80 h-80 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-600 flex-shrink-0 mb-6 lg:mb-0 lg:mr-6">
+          <img
+            src={imageRoot + 'Me.png'} // Replace with actual path to your picture
+            alt="Profile picture"
+            className="w-full h-full object-contain"
+          />
+        </div>
+
+        {/* Text Section */}
+        <div className="text-center max-w-4xl">
           <p className="text-base md:text-lg">
-            Welcome to my portfolio built with Javascript, React, HTML and Tailwind CSS! This site showcases my projects, skills, and experience. Feel free to explore and connect with me through GitHub, LinkedIn, or by sending a direct message in the contact section below!
+            <p>Welcome to my portfolio built with Javascript, React, HTML and Tailwind CSS! This site showcases my projects, skills, and experience.</p>
+            <br />
+            <p>Feel free to explore and connect with me through GitHub, LinkedIn, or by sending a direct message in the contact section below!</p>
           </p>
         </div>
       </section>
 
+      {/* Projects Section */}
       <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
         <h2 className="text-3xl font-semibold text-center">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
@@ -214,6 +173,51 @@ function App() {
         </div>
       </section>
 
+      {/* Jobs Section */}
+      <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
+        <h2 className="text-3xl font-semibold text-center">Work Experience</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+          {jobs.map((job, index) => (
+            <div key={index} className="bg-gray-300 p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white">
+              
+              {/* Job Title and Company Name */}
+              <h3 className="text-2xl font-semibold">{job.title}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">@</p>
+              <p className="text-2xl font-semibold">{job.company}</p>
+
+              <p className="text-gray-600 dark:text-gray-400 mt-2">{job.description}</p>
+
+              {/* Tools Section */}
+              {job.tools && (
+                <div className="mt-2 flex flex-wrap justify-center gap-2">
+                  {job.tools.map((tool, index) => (
+                    <span
+                      key={index}
+                      className="inline-block bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 px-2 py-1 text-sm rounded-full"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Company Website Link */}
+              {job.link && (
+                <a
+                  href={job.link}
+                  className="text-gray-600 mt-4 inline-block dark:text-blue-400"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Company Website
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
       <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
         <div className="mt-10 bg-gray-300 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
           <h3 className="text-2xl font-semibold text-center">Contact Me</h3>
@@ -288,132 +292,12 @@ function App() {
           )}
         </div>
       </section>
+
       <footer className="p-6 bg-gray-300 text-center dark:bg-gray-900 dark:text-white">
         <p>&copy; 2024 Evan's Portfolio</p>
       </footer>
     </div>
   );
 }
-
-const MediaCarousel = ({ media }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFullScreen, setIsFullScreen] = useState(false); // Custom full-screen state
-  const mediaContainerRef = useRef(null);
-  const videoRef = useRef(null); // Reference to the video element
-
-  useEffect(() => {
-    const handleFullScreenChange = () => {
-      const isNowFullScreen = !!document.fullscreenElement;
-      setIsFullScreen(isNowFullScreen);
-    };
-
-    document.addEventListener('fullscreenchange', handleFullScreenChange);
-
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullScreenChange);
-    };
-  }, []);
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % media.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? media.length - 1 : prevIndex - 1
-    );
-  };
-
-  const toggleFullScreen = () => {
-    if (isFullScreen) {
-      document.exitFullscreen();
-    } else if (mediaContainerRef.current.requestFullscreen) {
-      mediaContainerRef.current.requestFullscreen();
-    }
-    setIsFullScreen(!isFullScreen);
-  };
-
-  const handleMediaChange = () => {
-    const currentMedia = media[currentIndex];
-    if (isFullScreen && currentMedia.endsWith('.mp4') && videoRef.current) {
-      // Exit custom full-screen
-      document.exitFullscreen().then(() => {
-        // Enter native full-screen for video
-        videoRef.current.requestFullscreen();
-      });
-    }
-  };
-
-  useEffect(() => {
-    handleMediaChange();
-  }, [currentIndex]);
-
-  const currentMedia = media[currentIndex];
-
-  return (
-    <div
-      ref={mediaContainerRef}
-      className={`relative h-80 transition-all ease-in-out ${isFullScreen ? 'fullscreen-active' : ''}`}
-      style={{ backgroundColor: 'black' }}
-    >
-      {/* Navigation Arrows */}
-      {media.length > 1 && (
-        <>
-          <button
-            onClick={handlePrev}
-            className={`absolute ${
-              isFullScreen ? 'left-2' : 'left-[-1.6rem]'
-            } top-1/2 transform -translate-y-1/2 bg-gray-200 text-black p-2 rounded-full dark:bg-gray-700 dark:text-white z-50`}
-          >
-            &lt;
-          </button>
-          <button
-            onClick={handleNext}
-            className={`absolute ${
-              isFullScreen ? 'right-2' : 'right-[-1.6rem]'
-            } top-1/2 transform -translate-y-1/2 bg-gray-200 text-black p-2 rounded-full dark:bg-gray-700 dark:text-white z-50`}
-          >
-            &gt;
-          </button>
-        </>
-      )}
-      <div className="w-full h-full flex justify-center items-center">
-        {currentMedia.includes('youtube.com/embed') ? (
-          <iframe
-            src={currentMedia}
-            className="w-full h-full rounded-lg"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="YouTube Video"
-          ></iframe>
-        ) : currentMedia.endsWith('.mp4') ? (
-          <video
-            ref={videoRef}
-            src={currentMedia}
-            className="w-full h-full object-contain rounded-lg"
-            controls
-          />
-        ) : (
-          <div className="relative w-full h-full">
-            <img
-              src={currentMedia}
-              alt={`Media ${currentIndex + 1}`}
-              className="w-full h-full object-contain rounded-lg"
-            />
-            <button
-              className="absolute bottom-2 right-2 bg-transparent text-white p-2 hidden sm:block"
-              onClick={toggleFullScreen}
-            >
-              <i
-                className={`fas ${isFullScreen ? 'fa-compress' : 'fa-expand'} text-lg`}
-              ></i>
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
 
 export default App;
