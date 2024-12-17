@@ -60,14 +60,14 @@ export const jobs = [
     company: 'General Dynamics',
     description: 'Developed graphical user interfaces for submarine acoustics.',
     link: 'https://gdmissionsystems.ca/',
-    tools: ['Java', 'C++', 'Linux', 'GUI', 'Ubuntu', 'Agile', 'Servers'],
+    tools: ['Java', 'C++', 'Linux', 'Ubuntu', 'Agile', 'Git', 'Servers', 'OOP', 'GUI'],
   },
   {
     title: 'Electrical Engineering Co-op',
     company: 'Aethera Technologies',
     description: 'Created GUIs to communicate with electronics.',
     link: 'https://aethera.com/',
-    tools: ['Python', 'TCP/IP', 'Modbus', 'OOP', 'GUI', 'Verilog'],
+    tools: ['Python', 'TCP/IP', 'Modbus', 'OOP', 'Bitbucket', 'GUI', 'Verilog'],
   },
   {
     title: 'Technical Project Specialist',

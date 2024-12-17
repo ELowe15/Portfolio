@@ -1,11 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { projects, jobs, imageRoot } from './Work.js';
 import { MediaCarousel } from './Carousel.js';
 import emailjs from 'emailjs-com';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Get the saved dark mode state from localStorage, default to false if not found
+    const savedDarkMode = localStorage.getItem('darkMode');
+    return savedDarkMode ? savedDarkMode === 'true' : true; // Default to true if not saved
+  });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,12 +20,18 @@ function App() {
 
   useEffect(() => {
     const htmlElement = document.documentElement;
+
+    // Save the dark mode state to localStorage
+    localStorage.setItem('darkMode', darkMode);
+
     if (darkMode) {
       htmlElement.classList.add('dark');
+      htmlElement.style.backgroundColor = ''; // Reset background color when dark mode is active
     } else {
       htmlElement.classList.remove('dark');
+      htmlElement.style.backgroundColor = 'white'; // Set background color to white when dark mode is inactive
     }
-  }, [darkMode]);
+  }, [darkMode]); // Run this effect when darkMode changes
 
   // Handle form data change
   const handleChange = (e) => {
@@ -62,12 +72,12 @@ function App() {
       {/* Dark Mode Toggle */}
       <button
         onClick={() => setDarkMode(!darkMode)}
-        className="fixed top-4 right-4 px-2 py-1 rounded-full text-sm font-bold text-yellow-400 bg-black hover:bg-gray-700 transition dark:bg-gray-500 dark:hover:bg-gray-600 z-10"
-      >
+        className="fixed top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold text-yellow400 bg-gray500 dark:bg-gray-500 hover:bg-lightText dark:hover:bg-gray-600 transition z-10"
+        >
         {darkMode ? '☀' : '🌙'}
       </button>
 
-      <header className="bg-gray-300 text-black p-6 dark:bg-gray-800 dark:text-white relative">
+      <header className="bg-lightMain text-black p-6 dark:bg-main dark:text-white relative">
         <div className="flex justify-between items-center">
           {/* Contact Section */}
           <div className="flex flex-col items-start justify-center h-full">
@@ -75,7 +85,7 @@ function App() {
               href="https://github.com/ELowe15"
               target="_blank"
               rel="noopener noreferrer"
-              className="mb-4 text-gray-600 dark:text-white text-sm md:text-xl flex items-center"
+              className="mb-4 text-lightText dark:text-white text-sm md:text-xl flex items-center"
             >
               <i className="fab fa-github"></i> <span className="ml-2">GitHub</span>
             </a>
@@ -83,7 +93,7 @@ function App() {
               href="https://www.linkedin.com/in/evan-lowe-53a7112aa/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 dark:text-white text-sm md:text-xl flex items-center"
+              className="text-lightText dark:text-white text-sm md:text-xl flex items-center"
             >
               <i className="fab fa-linkedin"></i> <span className="ml-2">LinkedIn</span>
             </a>
@@ -99,9 +109,9 @@ function App() {
       </header>
 
       {/* Summary Section */}
-      <section className="flex flex-col lg:flex-row items-center justify-center bg-gray-400 text-black p-6 dark:bg-gray-700 dark:text-white">
+      <section className="flex flex-col lg:flex-row items-center justify-center bg-summary text-black p-6 dark:bg-gray700 dark:text-white">
         {/* Picture Section */}
-        <div className="w-80 h-80 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-600 flex-shrink-0 mb-6 lg:mb-0 lg:mr-6">
+        <div className="w-80 h-80 rounded-full overflow-hidden bg-gray200 dark:bg-gray600 flex-shrink-0 mb-6 lg:mb-0 lg:mr-6">
           <img
             src={imageRoot + 'Me.png'} // Replace with actual path to your picture
             alt="Profile picture"
@@ -112,25 +122,25 @@ function App() {
         {/* Text Section */}
         <div className="text-center max-w-4xl">
           <p className="text-base md:text-lg">
-            <p>Welcome to my portfolio built with Javascript, React, HTML and Tailwind CSS! This site showcases my projects, skills, and experience.</p>
+            <p>Welcome to my portfolio built with Javascript, React, HTML and Tailwind CSS. This site showcases my projects, skills, and experience.</p>
             <br />
-            <p>Feel free to explore and connect with me through GitHub, LinkedIn, or by sending a direct message in the contact section below!</p>
+            <p>Feel free to explore and connect with me through GitHub, LinkedIn, or by sending a direct message in the contact section below.</p>
           </p>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
+      <section className="my-10 px-6 dark:bg-background dark:text-white">
         <h2 className="text-3xl font-semibold text-center">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-gray-300 p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white"
+              className="bg-lightMain p-6 rounded-lg shadow-lg dark:bg-main dark:text-white"
             >
               <MediaCarousel media={project.media} />
               <h3 className="text-2xl font-semibold mt-4">{project.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">{project.description}</p>
+              <p className="text-lightText dark:text-darkText mt-2">{project.description}</p>
 
               {/* Tools Section */}
               {project.tools && (
@@ -138,7 +148,7 @@ function App() {
                   {project.tools.map((tool, index) => (
                     <span
                       key={index}
-                      className="inline-block bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 px-2 py-1 text-sm rounded-full"
+                      className="inline-block bg-lightTool text-black dark:bg-darkTool dark:text-white px-2 py-1 text-sm rounded-full"
                     >
                       {tool}
                     </span>
@@ -149,18 +159,18 @@ function App() {
               {project.link && (
                 <a
                   href={project.link}
-                  className="text-gray-600 mt-4 inline-block dark:text-blue-400"
+                  className="text-lightLink mt-4 inline-block dark:text-darkLink"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  View Project
+                  View Live Project
                 </a>
               )}
               {project.githubLink && (
                 <div className="mt-4">
                   <a
                     href={project.githubLink}
-                    className="text-gray-600 dark:text-white"
+                    className="text-lightText dark:text-white"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -174,18 +184,17 @@ function App() {
       </section>
 
       {/* Jobs Section */}
-      <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
+      <section className="my-10 px-6 dark:bg-background dark:text-white">
         <h2 className="text-3xl font-semibold text-center">Work Experience</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {jobs.map((job, index) => (
-            <div key={index} className="bg-gray-300 p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white">
-              
+            <div key={index} className="bg-lightMain p-6 rounded-lg shadow-lg dark:bg-main dark:text-white">
               {/* Job Title and Company Name */}
               <h3 className="text-2xl font-semibold">{job.title}</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">@</p>
+              <p className="text-sm text-lightText dark:text-white">@</p>
               <p className="text-2xl font-semibold">{job.company}</p>
 
-              <p className="text-gray-600 dark:text-gray-400 mt-2">{job.description}</p>
+              <p className="text-lightText dark:text-darkText mt-2">{job.description}</p>
 
               {/* Tools Section */}
               {job.tools && (
@@ -193,7 +202,7 @@ function App() {
                   {job.tools.map((tool, index) => (
                     <span
                       key={index}
-                      className="inline-block bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 px-2 py-1 text-sm rounded-full"
+                      className="inline-block bg-lightTool text-black dark:bg-darkTool dark:text-white px-2 py-1 text-sm rounded-full"
                     >
                       {tool}
                     </span>
@@ -205,7 +214,7 @@ function App() {
               {job.link && (
                 <a
                   href={job.link}
-                  className="text-gray-600 mt-4 inline-block dark:text-blue-400"
+                  className="text-lightLink mt-4 inline-block dark:text-darkLink"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -218,13 +227,13 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section className="my-10 px-6 dark:bg-gray-900 dark:text-white">
-        <div className="mt-10 bg-gray-300 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+      <section className="my-10 px-6 dark:bg-background dark:text-white">
+        <div className="mt-10 bg-lightMain dark:bg-main p-6 rounded-lg shadow-lg">
           <h3 className="text-2xl font-semibold text-center">Contact Me</h3>
           <form onSubmit={sendEmail} className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="mb-4">
-                <label htmlFor="name" className="block text-gray-700 dark:text-gray-300">
+                <label htmlFor="name" className="block text-lightText dark:text-white">
                   Name
                 </label>
                 <input
@@ -233,12 +242,12 @@ function App() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                  className="w-full p-2 mt-2 rounded-md border border-gray300 dark:border-gray700 dark:bg-background dark:text-white"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-700 dark:text-gray-300">
+                <label htmlFor="email" className="block text-lightText dark:text-white">
                   Email
                 </label>
                 <input
@@ -247,12 +256,12 @@ function App() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                  className="w-full p-2 mt-2 rounded-md border border-gray300 dark:border-gray700 dark:bg-background dark:text-white"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="phone" className="block text-gray-700 dark:text-gray-300">
+                <label htmlFor="phone" className="block text-lightText dark:text-white">
                   Phone
                 </label>
                 <input
@@ -262,12 +271,12 @@ function App() {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="(Optional)"
-                  className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                  className="w-full p-2 mt-2 rounded-md border border-gray300 dark:border-gray700 dark:bg-background dark:text-white"
                 />
               </div>
             </div>
             <div className="mb-4">
-              <label htmlFor="message" className="block text-gray-700 dark:text-gray-300">
+              <label htmlFor="message" className="block text-lightText dark:text-white">
                 Message
               </label>
               <textarea
@@ -276,24 +285,24 @@ function App() {
                 value={formData.message}
                 onChange={handleChange}
                 rows="4"
-                className="w-full p-2 mt-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                className="w-full p-2 mt-2 rounded-md border border-gray300 dark:border-gray700 dark:bg-background dark:text-white"
                 required
               ></textarea>
             </div>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+              className="bg-button text-white px-4 py-2 rounded-md hover:bg-buttonHover transition"
             >
               Send Message
             </button>
           </form>
           {statusMessage && (
-            <div className="mt-4 text-center text-lg text-red-500">{statusMessage}</div>
+            <div className={`mt-4 text-center text-lg text-red-500`}>{statusMessage}</div>
           )}
         </div>
       </section>
 
-      <footer className="p-6 bg-gray-300 text-center dark:bg-gray-900 dark:text-white">
+      <footer className={`p-6 bg-gray-300 text-center dark:bg-background dark:text-white`}>
         <p>&copy; 2024 Evan's Portfolio</p>
       </footer>
     </div>
