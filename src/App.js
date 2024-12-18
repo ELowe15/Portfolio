@@ -6,7 +6,7 @@ import emailjs from 'emailjs-com';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
-    // Get the saved dark mode state from localStorage, default to false if not found
+    // Get the saved dark mode state from localStorage, default to true if not found
     const savedDarkMode = localStorage.getItem('darkMode');
     return savedDarkMode ? savedDarkMode === 'true' : true; // Default to true if not saved
   });

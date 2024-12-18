@@ -107,7 +107,7 @@ export const MediaCarousel = ({ media }) => {
                 className="w-full h-full object-contain rounded-lg"
               />
               <button
-                className="absolute bottom-2 right-2 bg-transparent text-white p-2 hidden sm:block"
+                className="absolute bottom-2 right-2 bg-transparent text-white hover:text-gray-300 p-2 hidden sm:block"
                 onClick={toggleFullScreen}
               >
                 <i
