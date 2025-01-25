@@ -52,6 +52,14 @@ export const projects = [
     media: [imageRoot + 'craps.png'],
     tools: ['Verilog', 'Digital Design', 'FPGA'],
   },
+  {
+    title: 'Assessment',
+    description: 'A technical front end assessment to showcase proper formatting on multiple platforms including mobile and desktop using vanilla Javascript.',
+    link: 'https://elowe15.github.io/Assessment/',
+    githubLink: 'https://github.com/ELowe15/Assessment',
+    media: [imageRoot + 'assessment.png'],
+    tools: ['JavaScript', 'HTML', 'CSS'],
+  },
 ];
 
 export const jobs = [

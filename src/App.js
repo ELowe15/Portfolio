@@ -29,7 +29,7 @@ function App() {
       htmlElement.style.backgroundColor = ''; // Reset background color when dark mode is active
     } else {
       htmlElement.classList.remove('dark');
-      htmlElement.style.backgroundColor = 'white'; // Set background color to white when dark mode is inactive
+      htmlElement.style.backgroundColor = '#F4F1EC'; // Set background color to white when dark mode is inactive
     }
   }, [darkMode]); // Run this effect when darkMode changes
 
@@ -65,16 +65,19 @@ function App() {
           setTimeout(() => setStatusMessage(''), 3000); // Clear message after 3 seconds
         }
       );
+      
   };
+
+  const [showAll, setShowAll] = useState(false); // State declaration for toggling
 
   return (
     <div className={`App ${darkMode ? 'dark' : ''}`}>
       {/* Dark Mode Toggle */}
       <button
         onClick={() => setDarkMode(!darkMode)}
-        className="fixed top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold text-yellow400 bg-gray500 dark:bg-gray-500 hover:bg-lightText dark:hover:bg-gray-600 transition z-10"
+        className="fixed top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold text-white bg-lightButton dark:bg-gray-500 hover:bg-lightButtonHover dark:hover:bg-gray-600 transition z-10"
         >
-        {darkMode ? '☀' : '🌙'}
+        {darkMode ? '☀' : '☾'}
       </button>
 
       <header className="bg-lightMain text-black p-6 dark:bg-main dark:text-white relative">
@@ -122,18 +125,32 @@ function App() {
         {/* Text Section */}
         <div className="text-center max-w-4xl">
           <p className="text-base md:text-lg">
-            <p>Welcome to my portfolio built with Javascript, React, HTML and Tailwind CSS. This site showcases my projects, skills, and experience.</p>
+            <p>
+              Welcome to my portfolio showcasing my projects, skills, and experience. Feel free to explore and connect with me 
+              through GitHub, LinkedIn, or by sending a direct message in the contact section below. 
+            </p>
             <br />
-            <p>Feel free to explore and connect with me through GitHub, LinkedIn, or by sending a direct message in the contact section below.</p>
+            <p>
+              This site is built with Javascript, React, HTML, and Tailwind CSS featuring dark and light mode settings. It is 
+              also powered with Google Analytics and EmailJS to handle the contact communication. 
+              {' '}
+              <a 
+                href="https://github.com/ELowe15/Portfolio" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-inherit"
+              >
+                <i className="fab fa-github text-xl"></i> GitHub Repo
+              </a>
+            </p>
           </p>
         </div>
       </section>
 
-      {/* Projects Section */}
       <section className="my-10 px-6 dark:bg-background dark:text-white">
         <h2 className="text-3xl font-semibold text-center">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {projects.map((project, index) => (
+          {projects.slice(0, showAll ? projects.length : 6).map((project, index) => (
             <div
               key={index}
               className="bg-lightMain p-6 rounded-lg shadow-lg dark:bg-main dark:text-white"
@@ -180,6 +197,20 @@ function App() {
               )}
             </div>
           ))}
+        </div>
+
+        {/* Toggle Button */}
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={() => setShowAll((prev) => !prev)}
+            className="w-12 h-12 bg-lightTool hover:bg-hoverLightTool text-black rounded-full shadow-lg dark:bg-darkTool dark:text-white dark:hover:bg-hoverDarkTool flex items-center justify-center"
+          >
+            {showAll ? (
+              <span className="text-2xl">▲</span> // Up arrow
+            ) : (
+              <span className="text-2xl">▼</span> // Down arrow
+            )}
+          </button>
         </div>
       </section>
 
@@ -291,7 +322,7 @@ function App() {
             </div>
             <button
               type="submit"
-              className="bg-button text-white px-4 py-2 rounded-md hover:bg-buttonHover transition"
+              className="bg-lightButton text-black dark:text-white px-4 py-2 rounded-md hover:bg-lightButtonHover dark:bg-darkButton dark:hover:bg-darkButtonHover transition"
             >
               Send Message
             </button>
@@ -302,8 +333,8 @@ function App() {
         </div>
       </section>
 
-      <footer className={`p-6 bg-gray-300 text-center dark:bg-background dark:text-white`}>
-        <p>&copy; 2024 Evan's Portfolio</p>
+      <footer className={`p-6 bg-lightMain text-center dark:bg-background dark:text-white`}>
+        <p>&copy; 2025 Evan's Portfolio</p>
       </footer>
     </div>
   );

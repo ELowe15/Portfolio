@@ -58,7 +58,7 @@ export const MediaCarousel = ({ media }) => {
     return (
       <div
         ref={mediaContainerRef}
-        className={`relative h-80 transition-all ease-in-out ${isFullScreen ? 'fullscreen-active' : ''}`}
+        className={`relative h-80 ${isFullScreen ? 'fullscreen-active' : ''}`}
         style={{ backgroundColor: 'black' }}
       >
         {/* Navigation Arrows */}

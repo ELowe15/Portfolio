@@ -58,21 +58,22 @@ html {
   height: 100%;
 }
 
-/* Apply smooth transitions for background and color changes */
+/* Apply smooth transitions for background and color changes 
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Optional: Smooth transitions for dark mode toggle */
+/* Optional: Smooth transitions for dark mode toggle 
 button {
   transition: background-color 0.3s ease;
 }
+*/
 
 /* Add in App.css */
 
 .media-container {
   width: 100%;
-  transition: all 0.3s ease; /* Smooth transition when toggling */
+  /*transition: all 0.3s ease;  Smooth transition when toggling */
 }
 
 .media-container.normal {
