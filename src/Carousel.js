@@ -68,7 +68,7 @@ export const MediaCarousel = ({ media }) => {
               onClick={handlePrev}
               className={`absolute ${
                 isFullScreen ? 'left-2' : 'left-[-1.6rem]'
-              } top-1/2 transform -translate-y-1/2 bg-lightButtonHover hover:bg-lightButton text-black p-2 rounded-full dark:bg-darkTool dark:hover:bg-hoverDarkTool dark:text-white z-50`}
+              } top-1/2 transform -translate-y-1/2 bg-lightButton hover:bg-lightButtonHover text-black p-2 rounded-full dark:bg-darkTool dark:hover:bg-hoverDarkTool dark:text-white z-50`}
             >
               &lt;
             </button>
@@ -76,7 +76,7 @@ export const MediaCarousel = ({ media }) => {
               onClick={handleNext}
               className={`absolute ${
                 isFullScreen ? 'right-2' : 'right-[-1.6rem]'
-              } top-1/2 transform -translate-y-1/2 bg-lightButtonHover hover:bg-lightButton text-black p-2 rounded-full dark:bg-darkTool dark:hover:bg-hoverDarkTool dark:text-white z-50`}
+              } top-1/2 transform -translate-y-1/2 bg-lightButton hover:bg-lightButtonHover text-black p-2 rounded-full dark:bg-darkTool dark:hover:bg-hoverDarkTool dark:text-white z-50`}
             >
               &gt;
             </button>

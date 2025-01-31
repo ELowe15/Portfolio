@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 .App {
   text-align: center;
 }
@@ -50,7 +52,7 @@
 html {
   height: 100%;
   background-color: #111827; /* Light mode background */
-  font-family: 'Arial', sans-serif;
+  font-family: 'Manrope', ;
 }
 
 /* Ensure the app fills the height of the viewport */
