@@ -8,12 +8,13 @@ module.exports = {
         // Grays
         main: '#1F2937', // gray-800
         lightMain: '#B8D9D6', // gray-300
-        summary: '#FEE4D6', // gray-400
+        summary: '#F4F1EC', // gray-400
         gray500: '#6B7280', // gray-500
         darkText: '#9CA3AF', // gray-400
         lightText: '#4B5563', // gray-600
         gray700: '#374151', // gray-700
         background: '#111827', // gray-900
+        lightBackground: '#111827',
 
         darkTool: '#374151',
         hoverDarkTool: '#4B5563',

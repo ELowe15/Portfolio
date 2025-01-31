@@ -70,15 +70,44 @@ function App() {
 
   const [showAll, setShowAll] = useState(false); // State declaration for toggling
 
+  const [showScroll, setShowScroll] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 1) {
+        setShowScroll(true);
+      } else {
+        setShowScroll(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className={`App ${darkMode ? 'dark' : ''}`}>
       {/* Dark Mode Toggle */}
       <button
         onClick={() => setDarkMode(!darkMode)}
-        className="fixed top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold text-white bg-lightButton dark:bg-gray-500 hover:bg-lightButtonHover dark:hover:bg-gray-600 transition z-10"
+        className="fixed top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold text-black dark:text-white bg-lightButton dark:bg-gray-500 hover:bg-lightButtonHover dark:hover:bg-gray-600 transition z-10"
         >
         {darkMode ? '☀' : '☾'}
       </button>
+
+      {/* Scroll-to-Top Button */}
+      {showScroll && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-black text-sm font-bold dark:text-white bg-lightButton dark:bg-gray-500 hover:bg-lightButtonHover dark:hover:bg-gray-600 transition z-10"
+        >
+          ↑
+        </button>
+      )}
 
       <header className="bg-lightMain text-black p-6 dark:bg-main dark:text-white relative">
         <div className="flex justify-between items-center">
@@ -203,7 +232,7 @@ function App() {
         <div className="flex justify-center mt-6">
           <button
             onClick={() => setShowAll((prev) => !prev)}
-            className="w-12 h-12 bg-lightTool hover:bg-hoverLightTool text-black rounded-full shadow-lg dark:bg-darkTool dark:text-white dark:hover:bg-hoverDarkTool flex items-center justify-center"
+            className="w-12 h-12 bg-lightButton hover:bg-lightButtonHover text-black rounded-full shadow-lg dark:bg-darkTool dark:text-white dark:hover:bg-hoverDarkTool flex items-center justify-center"
           >
             {showAll ? (
               <span className="text-2xl">▲</span> // Up arrow
