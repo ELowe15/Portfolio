@@ -119,7 +119,7 @@ function App() {
               rel="noopener noreferrer"
               className="mb-4 text-lightText dark:text-white text-sm md:text-xl flex items-center"
             >
-              <i className="fab fa-github"></i> <span className="ml-2">GitHub</span>
+              <i className="fab fa-github"></i> <span className="ml-2 hover:underline">GitHub</span>
             </a>
             <a
               href="https://www.linkedin.com/in/evan-lowe-53a7112aa/"
@@ -127,7 +127,7 @@ function App() {
               rel="noopener noreferrer"
               className="text-lightText dark:text-white text-sm md:text-xl flex items-center"
             >
-              <i className="fab fa-linkedin"></i> <span className="ml-2">LinkedIn</span>
+              <i className="fab fa-linkedin"></i> <span className="ml-2 hover:underline">LinkedIn</span>
             </a>
           </div>
 
@@ -160,18 +160,17 @@ function App() {
             </p>
             <br />
             <p>
-              This site is built with Javascript, React, HTML, and Tailwind CSS featuring dark and light mode settings. It is 
+              This site is built with Javascript, React, HTML, and Tailwind CSS featuring dark and light mode settings. It's 
               also powered with Google Analytics and EmailJS to handle the contact communication. 
-              {' '}
-              <a 
+            </p>
+            <a 
                 href="https://github.com/ELowe15/Portfolio" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-inherit"
+                className="text-inherit hover:underline"
               >
                 <i className="fab fa-github text-xl"></i> GitHub Repo
               </a>
-            </p>
           </p>
         </div>
       </section>
@@ -205,7 +204,7 @@ function App() {
               {project.link && (
                 <a
                   href={project.link}
-                  className="text-lightLink mt-4 inline-block dark:text-darkLink"
+                  className="text-lightLink mt-4 inline-block dark:text-darkLink hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -216,7 +215,7 @@ function App() {
                 <div className="mt-4">
                   <a
                     href={project.githubLink}
-                    className="text-lightText dark:text-white"
+                    className="text-lightText dark:text-white hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -274,7 +273,7 @@ function App() {
               {job.link && (
                 <a
                   href={job.link}
-                  className="text-lightLink mt-4 inline-block dark:text-darkLink"
+                  className="text-lightLink mt-4 inline-block dark:text-darkLink hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
