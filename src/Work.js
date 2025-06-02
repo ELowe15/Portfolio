@@ -27,6 +27,20 @@ export const projects = [
     tools: ['Python', 'Multithreading', 'Real Time Data Processing', 'EEG', 'Sensors', 'Game Design', 'Bluetooth', 'UDP'],
   },
   {
+    title: 'Animated Birthday Card',
+    description: 'A beautifully animated, mobile-optimized interactive birthday card designed as a three-panel swipeable card experience. The card opens with a realistic flip animation revealing a pastel-themed interior, complete with a tiered birthday cake, floating balloons, flower accents, carousel message section, and autoplaying music. The cake features animated number candles, sparklers, hydrangea accents, and frosting details, all rendered with custom CSS. Touch interactions include swipe gestures, tap-to-pop balloons, and responsive layout scaling. The project also includes basic source protection techniques like encryption and deployment separation.',
+    link: '',
+    githubLink:'',
+    media: [
+      imageRoot + 'cardFront.png',
+      imageRoot + 'cardOpen.png',
+      imageRoot + 'cakeDecor.png',
+      imageRoot + 'carouselMessage.png',
+      imageRoot + 'BirthdayCardDemo.mp4',
+    ],
+    tools: ['JavaScript', 'HTML', 'CSS', 'Encryption'],
+  },
+  {
     title: 'Oil Sensing Robot Simulation',
     description:
       'This project simulates control and communication from multiple sensors used in a sensor platform, including SBL (Short Baseline Location), Depth, and Oil sensors. It processes sensor data, calculates location coordinates based on sensor inputs, and sends data to a host PC for further use.',
@@ -63,6 +77,13 @@ export const projects = [
 ];
 
 export const jobs = [
+  {
+    title: 'Data Analyst',
+    company: 'Telus Digital',
+    description: 'Reviewed AI-generated content for accuracy and policy compliance across various task types.',
+    link: 'https://www.telusinternational.com/solutions/ai-data',
+    tools: ['Content Review', 'Policy Compliance', 'Research'],
+  },
   {
     title: 'Software Engineering Co-op',
     company: 'General Dynamics',
